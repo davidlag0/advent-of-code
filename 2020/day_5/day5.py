@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Advent of Code 2020
-"""
+'''
 --- Day 5: Binary Boarding ---
 You board your plane only to discover a new problem: you dropped your boarding pass! You aren't sure which seat is yours, and all of the flight attendants are busy with the flood of people that suddenly made it through passport control.
 
@@ -48,7 +48,7 @@ It's a completely full flight, so your seat should be the only missing boarding 
 Your seat wasn't at the very front or back, though; the seats with IDs +1 and -1 from yours will be in your list.
 
 What is the ID of your seat?
-"""
+'''
 import os
 from typing import Iterable
 
