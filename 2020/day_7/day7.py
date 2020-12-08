@@ -58,14 +58,21 @@ In this example, a single shiny gold bag must contain 126 other bags.
 
 How many individual bags are required inside your single shiny gold bag?
 '''
+
 import os
 import re
 from typing import Iterable
 import unittest
 
+
+TEST_INPUT_FILENAME = 'day_7_small_input.txt'
+INPUT_FILENAME = 'day_7_input.txt'
+
+
 def load_input_file(filename: str) -> Iterable[str]:
     with open(os.path.join(os.path.dirname(__file__), filename), 'r') as input:
         return map(str.strip, input.readlines())
+    
 
 def build_bag_tree(outer_bags: Iterable[str]) -> dict:
     all_bags = {}
@@ -77,11 +84,8 @@ def build_bag_tree(outer_bags: Iterable[str]) -> dict:
     
     return all_bags
 
-def traverse_bag_tree(bag_tree, current_bag, searched_bag_name) -> bool:
-    #print(f'start:', searched_bag_name)
-    #print(f'bag tree: {bag_tree}')
-    #print(f'current bag name: {current_bag}')
-    
+
+def traverse_bag_tree(bag_tree: dict, current_bag: set, searched_bag_name: str) -> bool:
     if searched_bag_name in bag_tree[current_bag]:
         return True
 
@@ -90,7 +94,8 @@ def traverse_bag_tree(bag_tree, current_bag, searched_bag_name) -> bool:
     
     return any(traverse_bag_tree(bag_tree, bag, searched_bag_name) for bag in bag_tree[current_bag])
 
-def count_bag_containers(outer_bags: Iterable[str], bag_name) -> int:
+
+def count_bag_containers(outer_bags: Iterable[str], bag_name: str) -> int:
     bag_count = 0
     bag_tree = build_bag_tree(outer_bags)
 
@@ -99,10 +104,43 @@ def count_bag_containers(outer_bags: Iterable[str], bag_name) -> int:
             bag_count += 1
         
     return bag_count
-    
-class Tests(unittest.TestCase):
 
-    def test_count_various_bag_containers(self):
+
+def get_match_dict(match):
+    return {match[1]: int(match[0])}
+
+
+def build_bag_tree_with_count(outer_bags: Iterable[str]) -> dict:
+    all_bags = {}
+    bag_list_pattern = re.compile(r'(\d)+\s(\w+\s\w+)\sbag')
+
+    for bag in outer_bags:
+        outer_bag, inside_bags_list = bag.split(' bags contain ')
+        for match in bag_list_pattern.findall(inside_bags_list):
+            if outer_bag in all_bags:
+                all_bags[outer_bag].update(get_match_dict(match))
+            else:
+                all_bags[outer_bag] = get_match_dict(match)
+    
+    return all_bags
+
+
+def traverse_bag_tree_and_count(bag_tree: dict, bag_name: str) -> int:
+    if bag_name not in bag_tree:
+        return 0
+    
+    return sum(bag_tree[bag_name].values()) + sum(bag_tree[bag_name][bag] * traverse_bag_tree_and_count(bag_tree, bag) for bag in bag_tree[bag_name])
+
+
+def count_individual_bags(outer_bags: Iterable[str], bag_name: str) -> int:
+    bag_tree = build_bag_tree_with_count(outer_bags)
+    
+    return traverse_bag_tree_and_count(bag_tree, bag_name)
+
+
+class Tests(unittest.TestCase):
+    
+    def test_count_bag_containers(self):
         cases = (
             ('light red', 0),
             ('dark orange', 0),
@@ -116,16 +154,32 @@ class Tests(unittest.TestCase):
         )
         
         for bag_name, expected in cases:
-            result = count_bag_containers(load_input_file('day_7_small_input.txt'), bag_name)
-            #print(f'bag name: {bag_name}')
-            self.assertEqual(result, expected)
+            with self.subTest(bag_name):
+                result = count_bag_containers(load_input_file(TEST_INPUT_FILENAME), bag_name)
+                self.assertEqual(result, expected)
 
     def test_count_gold_bag_containers(self):
-        result = count_bag_containers(load_input_file('day_7_small_input.txt'), 'shiny gold')
+        result = count_bag_containers(load_input_file(TEST_INPUT_FILENAME), 'shiny gold')
         self.assertEqual(result, 4)
+    
+    def test_count_individual_bags(self):
+        cases = (
+            ('faded blue', 0),
+            ('dotted black', 0),
+            ('vibrant plum', 11),
+            ('dark olive', 7),
+            ('shiny gold', 32),
+        )
         
-if __name__ == '__main__':    
+        for bag_name, expected in cases:
+            with self.subTest(bag_name):
+                result = count_individual_bags(load_input_file(TEST_INPUT_FILENAME), bag_name)
+                self.assertEqual(result, expected)
+
+
+if __name__ == '__main__':
     print('Running unit tests...')
     unittest.main(verbosity=2, exit=False)
     print('Puzzle Answers:')
-    print(f"Part 1: {count_bag_containers(load_input_file('day_7_input.txt'), 'shiny gold')}")
+    print(f"Part 1: {count_bag_containers(load_input_file(INPUT_FILENAME), 'shiny gold')}")
+    print(f"Part 2: {count_individual_bags(load_input_file(INPUT_FILENAME), 'shiny gold')}")
