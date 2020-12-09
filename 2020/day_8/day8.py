@@ -160,7 +160,6 @@ def execute_program(instruction_list: list, decoded: bool = False) -> tuple:
 
 def execute_program_after_instruction_change(filename: str) -> tuple:
     decoded_instruction_list = decode_all_instructions(load_instructions(filename))
-    #print(f'length: {len(decoded_instruction_list)}')
     
     for pointer in range(0, len(decoded_instruction_list)):
         fixed_decoded_instruction_list = decoded_instruction_list.copy()
@@ -170,8 +169,6 @@ def execute_program_after_instruction_change(filename: str) -> tuple:
         elif decoded_instruction_list[pointer][0] == 'nop':
             fixed_decoded_instruction_list[pointer] = ('jmp', fixed_decoded_instruction_list[pointer][1])
         
-        #print(f'new instructions: {fixed_decoded_instruction_list}')
-        #print(f'pointer: {pointer}')
         result = execute_program(fixed_decoded_instruction_list, decoded=True)
         
         if result[1] == 'success':
