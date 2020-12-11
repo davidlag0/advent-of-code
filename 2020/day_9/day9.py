@@ -106,13 +106,6 @@ TEST_INPUT_FILENAME = 'day_9_small_input.txt'
 INPUT_FILENAME = 'day_9_input.txt'
 
 
-class FoundContiguousNumbers(Exception):
-    '''
-    Raise when the list of contiguous numbers for which the sum is equal
-    to the invalid number is found.
-    '''
-
-
 def load_input_file(filename: str) -> Iterable[str]:
     '''Load the input file.'''
     with open(os.path.join(os.path.dirname(__file__), filename), 'r') as input_file:
@@ -121,37 +114,25 @@ def load_input_file(filename: str) -> Iterable[str]:
 
 def find_encoding_error(filename: str, preamble_length: int) -> int:
     '''Find the number causing the encoding error.'''
-    encoding_error = None
-    numbers = [int(number) for number in load_input_file(filename)]
+    numbers = tuple(map(int, load_input_file(filename)))
 
     for position in range(preamble_length, len(numbers)):
         preamble = numbers[position - preamble_length:position]
-        preamble_combinations = list(combinations(preamble, 2))
-        preamble_sums = set([x + y for x, y in preamble_combinations])
+        preamble_sums = set(map(sum, combinations(preamble, 2)))
 
         if numbers[position] not in preamble_sums:
-            encoding_error = numbers[position]
-            break
-
-    return encoding_error
+            return numbers[position]
 
 
 def find_encryption_weakness(filename: str, invalid_number: int) -> int:
     '''Find the suite of contiguous numbers causing the encryption weakness.'''
-    encryption_weakness = None
-    numbers = [int(number) for number in load_input_file(filename)]
+    numbers = tuple(map(int, load_input_file(filename)))
 
-    try:
-        for length_of_contiguous_numbers in range(2, len(numbers)):
-            for position in range(0, len(numbers) - length_of_contiguous_numbers):
-                contiguous_numbers = numbers[position:position + length_of_contiguous_numbers]
-                if sum(contiguous_numbers) == invalid_number:
-                    raise FoundContiguousNumbers
-
-    except FoundContiguousNumbers:
-        encryption_weakness = max(contiguous_numbers) + min(contiguous_numbers)
-
-    return encryption_weakness
+    for length_of_contiguous_numbers in range(2, len(numbers)):
+        for position in range(0, len(numbers) - length_of_contiguous_numbers):
+            contiguous_numbers = numbers[position:position + length_of_contiguous_numbers]
+            if sum(contiguous_numbers) == invalid_number:
+                return max(contiguous_numbers) + min(contiguous_numbers)
 
 
 class Tests(unittest.TestCase):
