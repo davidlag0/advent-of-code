@@ -191,6 +191,8 @@ def solve_part1(filename: str):
 # Reference: https://laptrinhx.com/advent-of-code-2020-day-13-2503899644/
 # Seems to be possible to solve with the Chinese Remainder Theorem:
 # https://en.wikipedia.org/wiki/Chinese_remainder_theorem
+# Full explanation here that I would need to get into code:
+# https://www.dave4math.com/mathematics/chinese-remainder-theorem/
 def solve_part2(filename: str):
     '''Solve part 2 of the daily puzzle'''
     return filename
