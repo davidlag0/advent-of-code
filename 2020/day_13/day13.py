@@ -228,10 +228,15 @@ class Tests(unittest.TestCase):
         result = solve_part1(TEST_INPUT_FILENAME)
         self.assertEqual(result, 295)
 
+    def test_solve_part2(self) -> None:
+        '''Test to solve part 2 with test data'''
+        result = solve_part2(TEST_INPUT_FILENAME)
+        self.assertEqual(result, TEST_INPUT_FILENAME)
 
-if __name__ == '__main__':
+
+if __name__ == '__main__': # pragma: no cover
     print('Running unit tests...')
     unittest.main(verbosity=2, exit=False)
     print('Puzzle Answers:')
     print(f'Part 1: {solve_part1(INPUT_FILENAME)}')
-    print(f'Part 2: {0}')
+    print(f'Part 2: {solve_part2(INPUT_FILENAME)}')
