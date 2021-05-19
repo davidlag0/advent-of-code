@@ -170,11 +170,19 @@ outlet to your device?
 '''
 
 import os
-from typing import Iterable, Sequence
+from typing import Iterable, Tuple, TypedDict, List, Set
 from itertools import combinations
 from functools import reduce
 from operator import mul
 import unittest
+
+
+class JoltageSets(TypedDict):
+    '''Typing for joltage sets'''
+    prev: int
+    set: Set[int]
+    next: int
+    combinations: List[Set[int]]
 
 
 TEST_1_INPUT_FILENAME = 'day_10_small_input_1.txt'
@@ -188,7 +196,7 @@ def load_input_file(filename: str) -> Iterable[str]:
         return map(str.strip, input_file.readlines())
 
 
-def find_joltage_differences(filename: str) -> tuple:
+def find_joltage_differences(filename: str) -> Tuple[int, int]:
     '''Find the number of 3-jolt and 1-jolt differences.'''
     differences_of_1_jolt = 0
     differences_of_3_jolts = 0
@@ -207,7 +215,7 @@ def find_joltage_differences(filename: str) -> tuple:
     return (differences_of_1_jolt, differences_of_3_jolts + 1)
 
 
-def length_of_valid_joltage_combinations(joltage_sets: Sequence[set]) -> int:
+def length_of_valid_joltage_combinations(joltage_sets: List[JoltageSets]) -> int:
     '''
     Filter the joltage combinations and return the product of the list of length of
     the remaining groups of combinations
@@ -236,7 +244,7 @@ def calculate_distinct_ways(filename: str) -> int:
     Calculate the number of distinct ways to connect adapters together
     '''
     position = 0
-    joltage_sets = []
+    joltage_sets: List[JoltageSets] = []
     current_set = set()
 
     joltages = sorted(tuple(map(int, load_input_file(filename))))
@@ -266,22 +274,22 @@ def calculate_distinct_ways(filename: str) -> int:
 class Tests(unittest.TestCase):
     '''Tests'''
 
-    def test_find_joltage_differences_1(self):
+    def test_find_joltage_differences_1(self) -> None:
         '''Test for the joltage differences found.'''
         result = find_joltage_differences(TEST_1_INPUT_FILENAME)
         self.assertEqual(result, (7, 5))
 
-    def test_find_joltage_differences_2(self):
+    def test_find_joltage_differences_2(self) -> None:
         '''Test for the joltage differences found.'''
         result = find_joltage_differences(TEST_2_INPUT_FILENAME)
         self.assertEqual(result, (22, 10))
 
-    def test_calculate_distinct_ways_1(self):
+    def test_calculate_distinct_ways_1(self) -> None:
         '''Test for the calculation of distinct ways to connect adapters.'''
         result = calculate_distinct_ways(TEST_1_INPUT_FILENAME)
         self.assertEqual(result, 8)
 
-    def test_calculate_distinct_ways_2(self):
+    def test_calculate_distinct_ways_2(self) -> None:
         '''Test for the calculation of distinct ways to connect adapters.'''
         result = calculate_distinct_ways(TEST_2_INPUT_FILENAME)
         self.assertEqual(result, 19208)
