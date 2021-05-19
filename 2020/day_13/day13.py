@@ -158,7 +158,7 @@ def load_input_file(filename: str) -> Tuple[int, List[int]]:
         return (timestamp, bus_ids)
 
 
-def get_next_bus_stop(timestamp: int, bus_id: int):
+def get_next_bus_stop(timestamp: int, bus_id: int) -> int:
     '''Given a timestamp and bus_id, return the next timestamp at which the bus will stop'''
     return math.ceil(timestamp / bus_id) * bus_id
 
@@ -179,7 +179,7 @@ def find_earliest_bus(timestamp: int, bus_ids: List[int]) -> Tuple[int, int]:
     return (earliest_bus_id, next_bus_stop_timestamp)
 
 
-def solve_part1(filename: str):
+def solve_part1(filename: str) -> int:
     '''Solve part 1 of the daily puzzle'''
     timestamp, buses = load_input_file(filename)
 
@@ -193,7 +193,7 @@ def solve_part1(filename: str):
 # https://en.wikipedia.org/wiki/Chinese_remainder_theorem
 # Full explanation here that I would need to get into code:
 # https://www.dave4math.com/mathematics/chinese-remainder-theorem/
-def solve_part2(filename: str):
+def solve_part2(filename: str) -> str:
     '''Solve part 2 of the daily puzzle'''
     return filename
 
@@ -209,7 +209,7 @@ class Tests(unittest.TestCase):
         (19, 950)
     )
 
-    def test_next_bus_stop(self):
+    def test_next_bus_stop(self) -> None:
         '''Test the timestamp at which we can expect a certain bus to stop'''
 
         for case in self.buses:
@@ -217,13 +217,13 @@ class Tests(unittest.TestCase):
                 result = get_next_bus_stop(self.timestamp, case[0])
                 self.assertEqual(result, case[1])
 
-    def test_find_earliest_bus(self):
+    def test_find_earliest_bus(self) -> None:
         '''Test to find the earliest bus given a timestamp and a list of bus IDs'''
 
         result = find_earliest_bus(self.timestamp, [bus_id for bus_id, _ in self.buses])
         self.assertEqual(result, (59, 944))
 
-    def test_solve_part1(self):
+    def test_solve_part1(self) -> None:
         '''Test to solve part 1 with test data'''
         result = solve_part1(TEST_INPUT_FILENAME)
         self.assertEqual(result, 295)
