@@ -295,7 +295,7 @@ class Tests(unittest.TestCase):
         self.assertEqual(result, 19208)
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': # pragma: no cover
     print('Running unit tests...')
     unittest.main(verbosity=2, exit=False)
     print('Puzzle Answers:')
