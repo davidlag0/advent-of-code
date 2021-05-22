@@ -4,3 +4,6 @@
 
 ### Day 13 (Part 2)
 * Chinese Remainder Theorem
+
+### Day 15 (Part 2)
+* Improve performance
