@@ -7,3 +7,14 @@
 
 ### Day 15 (Part 2)
 * Improve performance
+
+## Usage
+
+### Run tests in current environment
+`$ pytest`
+
+### Run tests with tox
+`$ tox`
+
+### Run vulnerability tests (almost only bandit)
+`$ pytest --no-cov -qqqq --co --bandit`
