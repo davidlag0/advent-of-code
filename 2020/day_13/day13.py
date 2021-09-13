@@ -169,7 +169,7 @@ def find_earliest_bus(timestamp: int, bus_ids: List[int]) -> Tuple[int, int]:
     Given a timestamp and a list of bus_ids, return the earliest bus ID and the timestamp
     for its next stop.
     '''
-    bus_stops = dict()
+    bus_stops = {}
 
     for bus_id in bus_ids:
         bus_stops[get_next_bus_stop(timestamp, bus_id)] = bus_id
