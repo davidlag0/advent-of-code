@@ -17,4 +17,4 @@
 `$ tox`
 
 ### Run vulnerability tests (almost only bandit)
-`$ pytest --no-cov -qqqq --co --bandit`
+`$ bandit -r 2020`
