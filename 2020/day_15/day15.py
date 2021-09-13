@@ -88,7 +88,8 @@ INPUT_FILENAME = 'day_15_input.txt'
 
 def load_input_file(filename: str) -> List[int]:
     '''Load the input file'''
-    with open(os.path.join(os.path.dirname(__file__), filename), 'r') as input_file:
+    with open(os.path.join(os.path.dirname(__file__), filename), 'r',
+                encoding='utf-8') as input_file:
         return list(map(int, input_file.read().strip().split(',')))
 
 
