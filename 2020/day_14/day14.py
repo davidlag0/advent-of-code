@@ -144,7 +144,8 @@ INPUT_FILENAME = 'day_14_input.txt'
 
 def load_input_file(filename: str) -> Iterable[str]:
     '''Load the input file'''
-    with open(os.path.join(os.path.dirname(__file__), filename), 'r') as input_file:
+    with open(os.path.join(os.path.dirname(__file__), filename), 'r',
+                encoding='utf-8') as input_file:
         return map(str.strip, input_file.readlines())
 
 
