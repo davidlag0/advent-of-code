@@ -5,6 +5,35 @@
 requires = ["setuptools >= 35.0.2", "wheel >= 0.29.0"]
 build-backend = "setuptools.build_meta"
 
+[tool.pytest.ini_options]
+python_files = "*.py"
+addopts = [
+    "-v",
+    "-ra",
+    "-W=always",
+    "--cov",
+    "--cov-append",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-branch",
+    "--cov-fail-under=100",
+    "--ignore-glob=**/day1.py",
+    "--ignore-glob=**/day2.py",
+    "--ignore-glob=**/day3.py",
+    "--ignore-glob=**/day4.py",
+    "--ignore-glob=**/day5.py",
+    "--ignore-glob=**/day6.py",
+    "--ignore-glob=**/day7.py",
+    "--ignore-glob=**/day8.py",
+    "--ignore-glob=**/day9.py",
+    "--ignore-glob=**/day10.py",
+    "--ignore-glob=**/day11.py",
+    "--ignore-glob=**/day12.py",
+    "--ignore-glob=setup.py",
+    "--mypy",
+    "--pylint"
+]
+
 [tool.tox]
 legacy_tox_ini = """
 [tox]
