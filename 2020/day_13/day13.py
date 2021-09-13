@@ -151,7 +151,8 @@ INPUT_FILENAME = 'day_13_input.txt'
 
 def load_input_file(filename: str) -> Tuple[int, List[int]]:
     '''Load the input file'''
-    with open(os.path.join(os.path.dirname(__file__), filename), 'r') as input_file:
+    with open(os.path.join(os.path.dirname(__file__), filename), 'r',
+                encoding='utf-8') as input_file:
         timestamp = int(input_file.readline())
         bus_ids = [int(bus_id) for bus_id in input_file.readline().split(',') if bus_id != 'x']
 
