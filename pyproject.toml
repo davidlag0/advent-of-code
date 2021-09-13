@@ -47,6 +47,9 @@ warn_return_any = true
 warn_unreachable = true
 warn_incomplete_stub = true
 
+[tool.coverage.report]
+omit = [".tox/*"]
+
 [tool.tox]
 legacy_tox_ini = """
 [tox]
