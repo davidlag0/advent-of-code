@@ -95,7 +95,7 @@ def load_input_file(filename: str) -> List[int]:
 
 def solve_part1(starting_numbers: List[int], last_turn: int) -> int:
     '''Solve part 1 of the puzzle'''
-    turns_dict: Dict[int, List[int]] = dict()
+    turns_dict: Dict[int, List[int]] = {}
     current_turn: int = 1
     last_spoken_number: int = 0
 
