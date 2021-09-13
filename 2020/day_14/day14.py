@@ -170,7 +170,8 @@ class Program:
 
         return result_address
 
-    def resolve_address(self, masked_address: str) -> List[int]:
+    @staticmethod
+    def resolve_address(masked_address: str) -> List[int]:
         '''Given a masked address, return memory addresses ready for writing'''
         addresses: List[int] = []
         number_of_x: int = masked_address.count('X')
