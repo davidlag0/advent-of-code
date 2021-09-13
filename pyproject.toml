@@ -1,5 +1,8 @@
 [build-system]
-requires = ["setuptools >= 40.6.0", "wheel"]
+# Minimum requirements for the build system to execute according to PEP 508
+# specifications plus combination with what is required for tox
+# here: https://tox.readthedocs.io/en/latest/example/basic.html
+requires = ["setuptools >= 35.0.2", "wheel >= 0.29.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.tox]
