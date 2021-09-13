@@ -156,7 +156,7 @@ class Program:
 
     def __init__(self, version_one: bool = True) -> None:
         self.__mask = 'X' * 36
-        self.__memory: Dict[int, int] = dict()
+        self.__memory: Dict[int, int] = {}
         self.__version_one = version_one
 
     def apply_v2_mask(self, memory_slot: int) -> str:
