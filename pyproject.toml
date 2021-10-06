@@ -55,7 +55,7 @@ omit = [".tox/*"]
 [tool.tox]
 legacy_tox_ini = """
 [tox]
-envlist = clean,py38,py39
+envlist = clean,py38,py39,py310
 isolated_build = True
 
 [testenv]
