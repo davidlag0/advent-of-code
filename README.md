@@ -16,5 +16,5 @@
 ### Run tests with tox
 `$ tox`
 
-### Run vulnerability tests (almost only bandit)
+### Run vulnerability tests
 `$ bandit -r 2020`
