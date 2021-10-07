@@ -163,7 +163,7 @@ class Program:
         '''Return a masked address'''
         result_address: str = ''
 
-        for (address_char, mask_char) in zip('{:36b}'.format(memory_slot), self.mask):
+        for (address_char, mask_char) in zip(f'{memory_slot:36b}', self.mask):
             if address_char == '1' and mask_char == '0':
                 result_address += '1'
             else:
@@ -179,7 +179,7 @@ class Program:
         number_of_addresses = int(math.pow(2, number_of_x))
 
         for specific_address in range(number_of_addresses):
-            binary_address: str = '{0:b}'.format(specific_address).zfill(number_of_x)
+            binary_address: str = f'{specific_address:0b}'.zfill(number_of_x)
             address_iterator: Iterator[str] = iter(binary_address)
 
             # pylint: disable=unused-argument
