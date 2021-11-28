@@ -198,15 +198,21 @@ class Tests(unittest.TestCase):
 
 
 if __name__ == '__main__': # pragma: no cover
-    print('Running unit tests...')
-    unittest.main(verbosity=2, exit=False)
+    '''
+        print('Running unit tests...')
+        unittest.main(verbosity=2, exit=False)
 
-    print('Puzzle Answers:')
+        print('Puzzle Answers:')
 
-    part1_start_time = time.perf_counter_ns()
-    part1_result = solve_part1(load_input_file(INPUT_FILENAME), 2020)
-    part1_stop_time = time.perf_counter_ns()
-    print(f'Part 1: {part1_result} - '
-        f'Completed in {(part1_stop_time - part1_start_time)/1000}µs')
+        part1_start_time = time.perf_counter_ns()
+        part1_result = solve_part1(load_input_file(INPUT_FILENAME), 2020)
+        part1_stop_time = time.perf_counter_ns()
+        print(f'Part 1: {part1_result} - '
+            f'Completed in {(part1_stop_time - part1_start_time)/1000}µs')
+    '''
 
-    #print(f'Part 2: {solve_part1([0, 1, 5, 10, 3, 12, 19], 30000000)}')
+    part2_start_time = time.perf_counter_ns()
+    part2_result = solve_part1([0, 1, 5, 10, 3, 12, 19], 30000000)
+    part2_stop_time = time.perf_counter_ns()
+    print(f'Part 2: {part2_result} - '
+        f'Completed in {(part2_stop_time - part2_start_time)/1000}µs')
