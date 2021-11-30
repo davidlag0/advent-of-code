@@ -1,5 +1,6 @@
 use aoc_rust_2015::day1;
 use aoc_rust_2015::day2;
+use aoc_rust_2015::day3;
 use std::env;
 use std::fs;
 use std::process;
@@ -35,5 +36,14 @@ fn main() {
     println!(
         "Solution of Day 2, Part 2: {}",
         day2::part2(&load_file(&(base_path.clone() + "day2.txt")))
+    );
+
+    println!(
+        "Solution of Day 3, Part 1: {}",
+        day3::part1(&load_file(&(base_path.clone() + "day3.txt")))
+    );
+    println!(
+        "Solution of Day 3, Part 2: {}",
+        day3::part2(&load_file(&(base_path.clone() + "day3.txt")))
     );
 }
