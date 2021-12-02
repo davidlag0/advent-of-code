@@ -12,3 +12,7 @@ name = "aoc_rust_2015"
 path = "src/lib.rs"
 
 [dependencies]
+rust-crypto = "^0.2"
+
+[dev-dependencies]
+hex = "^0.3"
