@@ -15,6 +15,7 @@ pytest-cov = "*"
 pytest-pylint = "*"
 pytest-mypy = "*"
 pytest-randomly = "*"
+bandit = "*"
 
 [requires]
 python_version = "3.10"
